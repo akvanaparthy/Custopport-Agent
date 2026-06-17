@@ -291,7 +291,7 @@ function Bubble({ m }: { m: ReturnType<typeof useApp.getState>["messages"][numbe
         {m.runId && (
           <div className="mt-2.5 border-t border-line pt-2">
             <Link
-              to="/admin"
+              to={`/admin?run=${m.runId}`}
               className="font-mono text-[11px] text-ink-faint transition-colors hover:text-signal"
             >
               view reasoning trace →

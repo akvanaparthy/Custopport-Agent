@@ -46,7 +46,7 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 7. Frontend
 *Verify: chat round-trips; `/admin` Runs&Traces drill-down shows tool I/O + tokens + cost + latency + retries; Settings PUT works; Data tab resets an order.*
-- [~] Vite+React+TS+Tailwind scaffold (builds clean), design system (Bricolage/Hanken/JetBrains Mono, dark control-room), typed `api.ts` + `types.ts` + SSE reader, Chat `/` (auth switcher + in_chat verify + streaming + verdict badges), `/admin` runs list. Trace drill-in + Settings + Data tabs = 7b
+- [x] Vite+React+TS+Tailwind (builds clean), dark control-room design system, typed `api.ts`/`types.ts` + SSE reader, Chat `/` (auth switcher + in_chat verify + streaming + verdict badges), `/admin` console: Runs & Traces (per-step drill-in — tool I/O, tokens, cost, latency, retries/errors), Settings (live config, no temperature), Data (order edit/reset + reset-seed), chat→trace deep-link
 
 ## 8. Eval Tier-2 (adversarial)
 *Verify: `RUN_LIVE_EVAL=1 pytest` — injection/pleading/spoofing/cross-customer never APPROVE; scorecard emitted.*
