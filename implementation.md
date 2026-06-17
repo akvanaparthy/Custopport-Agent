@@ -46,7 +46,8 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 7. Frontend
 *Verify: chat round-trips; `/admin` Runs&Traces drill-down shows tool I/O + tokens + cost + latency + retries; Settings PUT works; Data tab resets an order.*
-- [x] Vite+React+TS+Tailwind (builds clean), dark control-room design system, typed `api.ts`/`types.ts` + SSE reader, Chat `/` (auth switcher + in_chat verify + streaming + verdict badges), `/admin` console: Runs & Traces (per-step drill-in — tool I/O, tokens, cost, latency, retries/errors), Settings (live config, no temperature), Data (order edit/reset + reset-seed), chat→trace deep-link
+- [x] Vite+React+TS+Tailwind (builds clean), typed `api.ts`/`types.ts` + SSE reader, `/admin` console: Runs & Traces (per-step drill-in — tool I/O, tokens, cost, latency, retries/errors), Settings (live config, no temperature), Data (order edit/reset + reset-seed), chat→trace deep-link
+- [x] **UI/UX redesign** (light · lime · glass, iOS/macOS vibrancy, Framer Motion): animated chat hero + recommended prompts; customer **Orders** page (bento cards + eligibility hint + "request refund" → chat), **order detail** modal, **account panel**; **support tickets/history** (persisted per exchange, `/history`); polished console. Backend: session-scoped `/api/orders`, `/api/tickets` (+ tests, 109 green)
 
 ## 8. Eval Tier-2 (adversarial)
 *Verify: `RUN_LIVE_EVAL=1 pytest` — injection/pleading/spoofing/cross-customer never APPROVE; scorecard emitted.*

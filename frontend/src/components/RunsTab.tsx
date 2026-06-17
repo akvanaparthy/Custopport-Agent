@@ -15,8 +15,8 @@ export function RunsTab({
 
   return (
     <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(300px,380px)_1fr]">
-      <div className="overflow-hidden rounded-xl border border-line">
-        <div className="border-b border-line bg-panel px-3 py-2 text-[11px] uppercase tracking-wider text-ink-faint">
+      <div className="glass overflow-hidden rounded-2xl">
+        <div className="border-b border-line bg-panel/60 px-3 py-2 text-[11px] uppercase tracking-wider text-ink-faint">
           Runs {runs.data ? `· ${runs.data.total}` : ""}
         </div>
         <div className="max-h-[70vh] divide-y divide-line overflow-auto">
@@ -47,7 +47,7 @@ export function RunsTab({
         </div>
       </div>
 
-      <div className="min-h-[40vh] rounded-xl border border-line bg-panel/30">
+      <div className="glass min-h-[40vh] rounded-2xl">
         {selectedRun ? (
           <TraceView runId={selectedRun} />
         ) : (

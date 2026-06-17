@@ -31,9 +31,9 @@ export function DataTab() {
         </button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-line">
+      <div className="glass overflow-hidden rounded-2xl">
         <table className="w-full text-sm">
-          <thead className="bg-panel text-left text-[11px] uppercase tracking-wider text-ink-faint">
+          <thead className="bg-panel/60 text-left text-[11px] uppercase tracking-wider text-ink-faint">
             <tr>
               {["Order", "Customer", "Item", "Category", "Total", "Status", "Refunded", ""].map((h) => (
                 <th key={h} className="px-3 py-2.5 font-medium">

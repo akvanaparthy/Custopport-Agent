@@ -21,7 +21,7 @@ export function SettingsTab() {
   const badge = (k: string) => <SourceBadge override={s.source_map[k] === "override"} />;
 
   return (
-    <div className="max-w-2xl space-y-1 rounded-xl border border-line bg-panel/40 p-2">
+    <div className="glass max-w-2xl space-y-1 rounded-2xl p-2">
       <Row label="Model" hint={badge("model")}>
         <Select value={s.model} options={MODELS} onChange={(v) => set({ model: v })} />
       </Row>
