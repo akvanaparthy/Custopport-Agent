@@ -54,7 +54,7 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 9. Deploy / packaging
 *Verify: `docker compose up` and `make dev` both boot, seed, and serve same-origin; missing key → friendly fail-fast.*
-- [ ] `deploy/` (Dockerfiles, compose, nginx) + `.env.example` + Makefile + README quickstart
+- [x] `backend/Dockerfile` + `frontend/Dockerfile` (multi-stage) + `nginx.conf` + root `docker-compose.yml` (single-origin) — **`docker compose up` verified: backend healthy, SPA served, /api proxied**. `.env.example` (root + backend), `Makefile`, `setup.ps1`/`dev.ps1`, `.gitattributes`, README with local + Docker + DigitalOcean deploy. Uvicorn boot also verified out of the box.
 
 ## 10. Polish + Loom dry-run
 *Verify: walk 6 golden scenarios incl. the failed/retried step; cost/latency callouts accurate.*
