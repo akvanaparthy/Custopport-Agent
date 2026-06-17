@@ -14,7 +14,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 # --------------------------------------------------------------------------- #
 # Enums
@@ -158,6 +158,8 @@ class AgentSettings(BaseModel):
     default_effort->effort, max_output_tokens->max_tokens); the admin Settings
     page overrides them in SQLite. The agent reads `max_tokens` (not
     `max_output_tokens`)."""
+
+    model_config = ConfigDict(protected_namespaces=())
 
     model: str = "claude-sonnet-4-6"
     effort: Effort = Effort.MEDIUM

@@ -22,9 +22,9 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 3. Observability + settings store + operator data
 *Verify: scripted run writes 6 ordered steps; totals == sum of steps; `PUT /api/admin/settings` then `GET` reflects override; `temperature` → 422; orders reset clears refund linkage.*
-- [ ] `observability/{db.py, trace_recorder.py, pricing.py, serializers.py, admin_router.py}`
-- [ ] `settings/{store.py, schema.py}` — env defaults overlaid by SQLite; `get_effective_config()` per request
-- [ ] order endpoints: list / edit status / full reset / reset-seed (admin-only, agent-inaccessible)
+- [~] `observability/{db.py, trace_recorder.py, pricing.py}` done + tested (15 tests); `serializers.py` + `admin_router.py` in 3b
+- [x] `settings/{store.py, schema.py}` + `config.py` — env defaults overlaid by SQLite; `get_effective_config()` per request; sampling params 422
+- [ ] order endpoints: list / edit status / full reset / reset-seed (admin-only, agent-inaccessible) — 3b
 
 ## 4. Orchestration
 *Verify: forced-fault run shows a retried step with both attempts; injection transcript never yields unauthorized APPROVE (mocked LLM).*
