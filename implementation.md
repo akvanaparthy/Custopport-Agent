@@ -14,10 +14,10 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 2. Data + engine + Tier-1 tests
 *Verify: `pytest` (no API key) green for engine + drift + seed.*
-- [ ] `backend/app/policy/engine.py` — pure `evaluate(ctx) -> Verdict`; precedence hard-DENY > ESCALATE > APPROVE
+- [x] `backend/app/policy/engine.py` — pure `evaluate(ctx) -> Verdict`; precedence hard-DENY > ESCALATE > APPROVE
 - [ ] `backend/app/db/{schema.sql, repository.py, seed.py}` — 15 customers; idempotent version-gated seed; `now` injected (engine reads no clock)
-- [ ] `backend/tests/test_policy_engine.py` — every rule + boundaries (day 30/31, $500/$500.01, mixed final-sale, already-refunded, low-confidence→escalate)
-- [ ] `backend/tests/test_policy_drift.py` — `set(POLICY_REFS) == policy.md "Policy Ref" anchors`
+- [x] `backend/tests/test_policy_engine.py` — every rule + boundaries (day 30/31, $500/$500.01, precedence, injection-irrelevance) — 25 tests green
+- [x] `backend/tests/test_policy_drift.py` — `set(POLICY_REFS) == policy.md refs` (9/9 aligned)
 - [ ] `backend/tests/test_seed.py` — idempotent; at least one order per terminal verdict
 
 ## 3. Observability + settings store + operator data
