@@ -5,12 +5,16 @@ optional here so the app (and tests) import without it; the API layer fails fast
 with a friendly message if it's missing when a live run is attempted."""
 from __future__ import annotations
 
+import pathlib
 from functools import lru_cache
 from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from .contracts import Effort, IdentityMode
+
+# Load backend/.env regardless of the working directory the app is launched from.
+_ENV_FILE = pathlib.Path(__file__).resolve().parents[1] / ".env"
 
 _DEFAULT_PERSONA = (
     "You are a calm, professional e-commerce customer-support agent. You help "
@@ -20,7 +24,7 @@ _DEFAULT_PERSONA = (
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", protected_namespaces=())
+    model_config = SettingsConfigDict(env_file=str(_ENV_FILE), extra="ignore", protected_namespaces=())
 
     anthropic_api_key: Optional[str] = None
     db_path: str = "./data/app.db"

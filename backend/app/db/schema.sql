@@ -44,5 +44,16 @@ CREATE TABLE IF NOT EXISTS refunds (
     created_at  TEXT NOT NULL
 );
 
+-- Server-side sessions: bind a request to one customer. In authenticated mode the
+-- customer_id is set at creation; in in_chat mode it's null until verified.
+CREATE TABLE IF NOT EXISTS sessions (
+    session_id    TEXT PRIMARY KEY,
+    identity_mode TEXT NOT NULL CHECK (identity_mode IN ('authenticated','in_chat')),
+    customer_id   TEXT,
+    verified      INTEGER NOT NULL DEFAULT 0,
+    created_at    TEXT NOT NULL,
+    last_seen     TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id);
 CREATE INDEX IF NOT EXISTS idx_refunds_order ON refunds(order_id);

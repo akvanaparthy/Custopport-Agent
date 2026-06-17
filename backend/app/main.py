@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .chat_router import router as chat_router
 from .config import get_settings
 from .db.database import connect, init_db
 from .db.seed import ensure_seeded
@@ -40,6 +41,7 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     app.include_router(admin_router)
+    app.include_router(chat_router)
 
     @app.get("/api/health")
     def health():
