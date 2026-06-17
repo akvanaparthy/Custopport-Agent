@@ -54,7 +54,7 @@ function StartPanel() {
     setErr(null);
     try {
       const s = await createSession({ customer_id: c.customer_id });
-      setSession({ sessionId: s.session_id, identityMode: "authenticated", customerId: c.customer_id, customerName: c.name, verified: true, messages: [] });
+      setSession({ sessionId: s.session_id, identityMode: "authenticated", customerId: c.customer_id, customerName: c.name, customerEmail: c.email, verified: true, messages: [] });
     } catch (e: any) {
       setErr(e.message);
     } finally {
@@ -69,7 +69,7 @@ function StartPanel() {
       const created = await createSession({ identity_mode: "in_chat" });
       const s = await verifySession(created.session_id, email, orderId);
       const name = customers.data?.find((c) => c.customer_id === s.customer_id)?.name ?? s.customer_id ?? "";
-      setSession({ sessionId: s.session_id, identityMode: "in_chat", customerId: s.customer_id, customerName: name, verified: true, messages: [] });
+      setSession({ sessionId: s.session_id, identityMode: "in_chat", customerId: s.customer_id, customerName: name, customerEmail: email, verified: true, messages: [] });
     } catch {
       setErr("Verification failed — the email and order id must match an account.");
     } finally {
@@ -178,7 +178,7 @@ function Field({ label, value, onChange, placeholder, mono }: { label: string; v
 /* ---- conversation ------------------------------------------------------- */
 
 function Conversation() {
-  const { sessionId, messages, addMessage, updateMessage } = useApp();
+  const { sessionId, messages, addMessage, updateMessage, draft, setDraft } = useApp();
   const setSession = useApp((s) => s.setSession);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
@@ -188,6 +188,15 @@ function Conversation() {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // a prompt handed off from the Orders page
+  useEffect(() => {
+    if (draft) {
+      setInput(draft);
+      setDraft(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const sendText = async (text: string) => {
     if (!text.trim() || streaming || !sessionId) return;

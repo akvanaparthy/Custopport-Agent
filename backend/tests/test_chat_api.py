@@ -58,3 +58,19 @@ def test_in_chat_verify_rejects_unowned_order(client):
     v = client.post("/api/session/verify", headers={"X-Session-Id": sess["session_id"]},
                     json={"email": "sarah.chen@example.com", "order_id": "ord_final"})
     assert v.status_code == 400
+
+
+def test_my_orders_scoped_with_hints(client):
+    sess = client.post("/api/session", json={"customer_id": "cust_01"}).json()
+    h = {"X-Session-Id": sess["session_id"]}
+    orders = client.get("/api/orders", headers=h).json()
+    ids = {o["order_id"] for o in orders}
+    assert "ord_clean" in ids and "ord_final" not in ids  # only own orders
+    clean = next(o for o in orders if o["order_id"] == "ord_clean")
+    assert clean["hint"]["tone"] == "eligible"
+    assert client.get("/api/orders/ord_clean", headers=h).status_code == 200
+    assert client.get("/api/orders/ord_final", headers=h).status_code == 404  # not owned
+
+
+def test_my_orders_requires_session(client):
+    assert client.get("/api/orders", headers={"X-Session-Id": "bad"}).status_code == 401

@@ -1,6 +1,7 @@
 // The ONLY module that touches the network. Components consume these via hooks.
 import type {
   Customer,
+  CustomerOrder,
   OrderView,
   RunDetail,
   RunSummary,
@@ -45,6 +46,12 @@ export const verifySession = (sessionId: string, email: string, order_id: string
     headers: authed(sessionId),
     body: JSON.stringify({ email, order_id }),
   });
+
+export const getMyOrders = (sessionId: string) =>
+  http<CustomerOrder[]>("/orders", { headers: authed(sessionId) });
+
+export const getMyOrder = (sessionId: string, orderId: string) =>
+  http<CustomerOrder>(`/orders/${orderId}`, { headers: authed(sessionId) });
 
 /** POST /api/chat and parse the coarse SSE status stream. */
 export async function streamChat(

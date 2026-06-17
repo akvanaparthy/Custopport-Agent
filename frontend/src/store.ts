@@ -18,12 +18,15 @@ interface AppState {
   identityMode: IdentityMode;
   customerId: string | null;
   customerName: string | null;
+  customerEmail: string | null;
   verified: boolean;
   messages: ChatMessage[];
+  draft: string | null; // a prompt handed off from the Orders page to the chat
   setSession: (s: Partial<AppState>) => void;
   resetSession: () => void;
   addMessage: (m: ChatMessage) => void;
   updateMessage: (id: string, patch: Partial<ChatMessage>) => void;
+  setDraft: (v: string | null) => void;
 }
 
 export const useApp = create<AppState>()(
@@ -33,14 +36,17 @@ export const useApp = create<AppState>()(
       identityMode: "authenticated",
       customerId: null,
       customerName: null,
+      customerEmail: null,
       verified: false,
       messages: [],
+      draft: null,
       setSession: (s) => set((st) => ({ ...st, ...s })),
       resetSession: () =>
-        set({ sessionId: null, customerId: null, customerName: null, verified: false, messages: [] }),
+        set({ sessionId: null, customerId: null, customerName: null, customerEmail: null, verified: false, messages: [], draft: null }),
       addMessage: (m) => set((st) => ({ messages: [...st.messages, m] })),
       updateMessage: (id, patch) =>
         set((st) => ({ messages: st.messages.map((m) => (m.id === id ? { ...m, ...patch } : m)) })),
+      setDraft: (v) => set({ draft: v }),
     }),
     {
       name: "refund-agent-session",
@@ -49,6 +55,7 @@ export const useApp = create<AppState>()(
         identityMode: s.identityMode,
         customerId: s.customerId,
         customerName: s.customerName,
+        customerEmail: s.customerEmail,
         verified: s.verified,
       }),
     },

@@ -95,6 +95,27 @@ export interface RunDetail extends RunSummary {
   steps: StepView[];
 }
 
+export interface OrderHint {
+  tone: "eligible" | "review" | "blocked" | "refunded";
+  label: string;
+}
+
+export interface CustomerOrder {
+  order_id: string;
+  item_name: string;
+  category: string;
+  order_total: number;
+  currency: string;
+  status: string;
+  order_date: string;
+  delivered_date: string | null;
+  is_final_sale: boolean;
+  item_condition: string;
+  already_refunded: boolean;
+  refunded_amount: number;
+  hint: OrderHint;
+}
+
 // SSE payloads from POST /api/chat
 export interface VerdictEvent {
   decision: Decision;
