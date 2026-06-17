@@ -29,10 +29,11 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 4. Orchestration
 *Verify: forced-fault run shows a retried step with both attempts; injection transcript never yields unauthorized APPROVE (mocked LLM).*
-- [~] building blocks done: `state.py`, `prompts.py`, `llm.py` (build_request_params — no sampling params + AnthropicLLM), `tools.py` (read-only scoped registry). Graph/nodes/runner in 4b (reuse trace_recorder, settings.store, repository, policy.engine — no dupes)
-- [ ] manual observable loop; read-only tools to LLM; `process_refund`/`escalate` code-only & verdict-gated — 4b
-- [ ] stop_reason hardening (max_tokens / context-exceeded / refusal → fail-closed ESCALATE) — 4b
-- [x] deterministic demo fault (cursed order) in ToolRegistry — transient-then-succeed, tested
+- [x] `agent/{state,prompts,llm,tools,guards,graph,runner}.py` — LangGraph graph; reuses trace_recorder/settings/repository/policy.engine (no dupes); `agent/` has zero FastAPI imports (clean separation)
+- [x] manual observable LLM loop; read-only tools to LLM; `process_refund` code-only & verdict-gated (money only on engine APPROVE)
+- [x] stop_reason hardening — refusal/max_tokens/context-exceeded/pause → fail-closed ESCALATE
+- [x] deterministic demo fault (cursed order) → visible retry trace step, tested
+- [x] orchestration tests (mocked LLM, no key): clean approve, final-sale deny, >$500 escalate, injection-held, cross-customer blocked, output-validation repair, cursed retry, full trace — **93 tests green**
 
 ## 5. Identity + guardrails
 *Verify: authenticated cross-customer access fails; in_chat verify-then-fetch; output-validation mismatch fails closed; guards OFF still blocks injection.*
