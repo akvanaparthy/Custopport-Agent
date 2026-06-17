@@ -29,10 +29,10 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 4. Orchestration
 *Verify: forced-fault run shows a retried step with both attempts; injection transcript never yields unauthorized APPROVE (mocked LLM).*
-- [ ] `agent/{graph.py, state.py, nodes/*, llm_client.py, tools.py, refund_service.py, trace.py, prompts.py, runner.py, config_provider.py}`
-- [ ] manual observable loop; read-only tools to LLM; `process_refund`/`escalate` code-only & verdict-gated
-- [ ] stop_reason hardening (max_tokens / context-exceeded / refusal → fail-closed ESCALATE)
-- [ ] deterministic demo fault (seeded "cursed" order) wired into live ToolRegistry
+- [~] building blocks done: `state.py`, `prompts.py`, `llm.py` (build_request_params — no sampling params + AnthropicLLM), `tools.py` (read-only scoped registry). Graph/nodes/runner in 4b (reuse trace_recorder, settings.store, repository, policy.engine — no dupes)
+- [ ] manual observable loop; read-only tools to LLM; `process_refund`/`escalate` code-only & verdict-gated — 4b
+- [ ] stop_reason hardening (max_tokens / context-exceeded / refusal → fail-closed ESCALATE) — 4b
+- [x] deterministic demo fault (cursed order) in ToolRegistry — transient-then-succeed, tested
 
 ## 5. Identity + guardrails
 *Verify: authenticated cross-customer access fails; in_chat verify-then-fetch; output-validation mismatch fails closed; guards OFF still blocks injection.*
