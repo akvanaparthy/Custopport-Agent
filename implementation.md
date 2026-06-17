@@ -15,10 +15,10 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 ## 2. Data + engine + Tier-1 tests
 *Verify: `pytest` (no API key) green for engine + drift + seed.*
 - [x] `backend/app/policy/engine.py` — pure `evaluate(ctx) -> Verdict`; precedence hard-DENY > ESCALATE > APPROVE
-- [ ] `backend/app/db/{schema.sql, repository.py, seed.py}` — 15 customers; idempotent version-gated seed; `now` injected (engine reads no clock)
+- [x] `backend/app/db/{schema.sql, database.py, repository.py, seed.py}` — 15 customers; idempotent version-gated seed; `now` injected; ownership-scoped reads; guarded `process_refund`; admin reset
 - [x] `backend/tests/test_policy_engine.py` — every rule + boundaries (day 30/31, $500/$500.01, precedence, injection-irrelevance) — 25 tests green
 - [x] `backend/tests/test_policy_drift.py` — `set(POLICY_REFS) == policy.md refs` (9/9 aligned)
-- [ ] `backend/tests/test_seed.py` — idempotent; at least one order per terminal verdict
+- [x] `backend/tests/test_seed.py` — idempotent; every terminal verdict seeded; ownership scoping; refund guard; full reset — 22 tests (47 total green)
 
 ## 3. Observability + settings store + operator data
 *Verify: scripted run writes 6 ordered steps; totals == sum of steps; `PUT /api/admin/settings` then `GET` reflects override; `temperature` → 422; orders reset clears refund linkage.*
