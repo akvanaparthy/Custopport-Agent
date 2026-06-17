@@ -3,6 +3,7 @@ import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import ChatPage from "./pages/ChatPage";
 import OrdersPage from "./pages/OrdersPage";
+import HistoryPage from "./pages/HistoryPage";
 import AdminPage from "./pages/AdminPage";
 import { useApp } from "./store";
 
@@ -73,6 +74,13 @@ function AccountChip() {
               >
                 Your orders →
               </Link>
+              <Link
+                to="/history"
+                onClick={() => setOpen(false)}
+                className="block rounded-xl px-3 py-2 text-sm text-ink transition-colors hover:bg-panel-2"
+              >
+                Support history →
+              </Link>
               <button
                 onClick={() => {
                   setOpen(false);
@@ -126,6 +134,7 @@ export default function App() {
             <Routes location={location}>
               <Route path="/" element={<ChatPage />} />
               <Route path="/orders" element={<OrdersPage />} />
+              <Route path="/history" element={<HistoryPage />} />
               <Route path="/admin" element={<AdminPage />} />
             </Routes>
           </motion.div>

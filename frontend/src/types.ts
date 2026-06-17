@@ -116,6 +116,17 @@ export interface CustomerOrder {
   hint: OrderHint;
 }
 
+export interface Ticket {
+  ticket_id: string;
+  conversation_id: string;
+  customer_message: string;
+  agent_reply: string;
+  verdict: Decision | null;
+  outcome: string;
+  run_id: string | null;
+  created_at: string;
+}
+
 // SSE payloads from POST /api/chat
 export interface VerdictEvent {
   decision: Decision;

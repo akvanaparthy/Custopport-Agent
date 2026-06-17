@@ -7,6 +7,7 @@ import type {
   RunSummary,
   Session,
   SettingsView,
+  Ticket,
 } from "./types";
 
 const API_BASE = window.__API_BASE__ || "/api";
@@ -52,6 +53,9 @@ export const getMyOrders = (sessionId: string) =>
 
 export const getMyOrder = (sessionId: string, orderId: string) =>
   http<CustomerOrder>(`/orders/${orderId}`, { headers: authed(sessionId) });
+
+export const getTickets = (sessionId: string) =>
+  http<Ticket[]>("/tickets", { headers: authed(sessionId) });
 
 /** POST /api/chat and parse the coarse SSE status stream. */
 export async function streamChat(

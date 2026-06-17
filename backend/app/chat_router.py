@@ -134,6 +134,24 @@ def my_order(order_id: str, x_session_id: str = Header(...), conn=Depends(get_co
     return _order_payload(row, datetime.now(timezone.utc))
 
 
+@router.get("/tickets")
+def my_tickets(x_session_id: str = Header(...), conn=Depends(get_conn)):
+    cid = _verified_customer(conn, x_session_id)
+    return [
+        {
+            "ticket_id": r["ticket_id"],
+            "conversation_id": r["conversation_id"],
+            "customer_message": r["customer_message"],
+            "agent_reply": r["agent_reply"],
+            "verdict": r["verdict"],
+            "outcome": r["outcome"],
+            "run_id": r["run_id"],
+            "created_at": r["created_at"],
+        }
+        for r in repo.list_tickets(conn, cid)
+    ]
+
+
 def _sse(event: str, data: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(data)}\n\n"
 
@@ -149,13 +167,21 @@ def chat(body: ChatBody, x_session_id: str = Header(...), conn=Depends(get_conn)
     identity = sessions.to_identity(sess)
     conversation_id = body.conversation_id or ("conv_" + uuid.uuid4().hex[:12])
     message_id = "msg_" + uuid.uuid4().hex[:12]
+    now = datetime.now(timezone.utc)
 
     def gen():
         yield _sse("run_started", {"conversation_id": conversation_id})
         result = run_agent(
             messages=[{"role": "user", "content": body.message}],
             identity=identity, conn=conn, llm=llm,
-            conversation_id=conversation_id, message_id=message_id,
+            conversation_id=conversation_id, message_id=message_id, now=now,
+        )
+        # persist the exchange as a support ticket (history)
+        repo.create_ticket(
+            conn, conversation_id=conversation_id, customer_id=identity.customer_id or "",
+            customer_message=body.message, agent_reply=result.reply,
+            verdict=result.verdict.decision.value if result.verdict else None,
+            outcome=result.outcome, run_id=result.run_id, now=now,
         )
         if result.verdict is not None:
             yield _sse("verdict", {

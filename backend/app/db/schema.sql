@@ -55,5 +55,19 @@ CREATE TABLE IF NOT EXISTS sessions (
     last_seen     TEXT NOT NULL
 );
 
+-- Support tickets: one row per finished chat exchange (history the customer can review).
+CREATE TABLE IF NOT EXISTS tickets (
+    ticket_id        TEXT PRIMARY KEY,
+    conversation_id  TEXT NOT NULL,
+    customer_id      TEXT NOT NULL REFERENCES customers(customer_id),
+    customer_message TEXT NOT NULL,
+    agent_reply      TEXT NOT NULL,
+    verdict          TEXT,
+    outcome          TEXT NOT NULL,
+    run_id           TEXT,
+    created_at       TEXT NOT NULL
+);
+
 CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id);
 CREATE INDEX IF NOT EXISTS idx_refunds_order ON refunds(order_id);
+CREATE INDEX IF NOT EXISTS idx_tickets_customer ON tickets(customer_id, created_at DESC);

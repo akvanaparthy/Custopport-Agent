@@ -178,3 +178,37 @@ def reset_order(conn: sqlite3.Connection, order_id: str, status: str = "delivere
 def reset_seed(conn: sqlite3.Connection, now: datetime) -> None:
     """Wipe and re-seed to pristine demo state."""
     ensure_seeded(conn, now, force=True)
+
+
+# --- tickets (support history) -------------------------------------------- #
+
+
+def create_ticket(
+    conn: sqlite3.Connection,
+    *,
+    conversation_id: str,
+    customer_id: str,
+    customer_message: str,
+    agent_reply: str,
+    verdict: Optional[str],
+    outcome: str,
+    run_id: Optional[str],
+    now: datetime,
+) -> str:
+    ticket_id = "tkt_" + uuid.uuid4().hex[:12]
+    conn.execute(
+        """INSERT INTO tickets(ticket_id, conversation_id, customer_id, customer_message,
+               agent_reply, verdict, outcome, run_id, created_at)
+           VALUES (?,?,?,?,?,?,?,?,?)""",
+        (ticket_id, conversation_id, customer_id, customer_message, agent_reply,
+         verdict, outcome, run_id, now.isoformat()),
+    )
+    conn.commit()
+    return ticket_id
+
+
+def list_tickets(conn: sqlite3.Connection, customer_id: str, limit: int = 50) -> list[sqlite3.Row]:
+    return conn.execute(
+        "SELECT * FROM tickets WHERE customer_id = ? ORDER BY created_at DESC LIMIT ?",
+        (customer_id, limit),
+    ).fetchall()

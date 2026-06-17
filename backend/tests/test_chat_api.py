@@ -74,3 +74,15 @@ def test_my_orders_scoped_with_hints(client):
 
 def test_my_orders_requires_session(client):
     assert client.get("/api/orders", headers={"X-Session-Id": "bad"}).status_code == 401
+
+
+def test_chat_creates_a_ticket(client):
+    _use_fake(client, [classify("ord_clean", "damaged")])
+    sess = client.post("/api/session", json={"customer_id": "cust_01"}).json()
+    h = {"X-Session-Id": sess["session_id"]}
+    client.post("/api/chat", headers=h, json={"message": "my headphones broke, refund please"})
+    tickets = client.get("/api/tickets", headers=h).json()
+    assert len(tickets) == 1
+    assert tickets[0]["verdict"] == "APPROVE"
+    assert "headphones" in tickets[0]["customer_message"]
+    assert tickets[0]["run_id"]
