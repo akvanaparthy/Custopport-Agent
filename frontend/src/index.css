@@ -1,29 +1,35 @@
 @import "tailwindcss";
 
-/* ---- design tokens (control-room dark) ---------------------------------- */
+/* ---- design tokens (light · lime · glass) ------------------------------- */
 @theme {
   --font-display: "Bricolage Grotesque", ui-sans-serif, sans-serif;
-  --font-sans: "Hanken Grotesk", ui-sans-serif, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-  --color-canvas: #0a0c0f;
-  --color-panel: #12151a;
-  --color-panel-2: #171b21;
-  --color-line: #242a32;
-  --color-line-bright: #323a44;
-  --color-ink: #e8ebef;
-  --color-ink-dim: #9aa3af;
-  --color-ink-faint: #5b6470;
+  --color-canvas: #f4f6f1;
+  --color-panel: #ffffff;
+  --color-panel-2: #eef1ea;
+  --color-line: #e7eae2;
+  --color-line-bright: #d6dacd;
+  --color-ink: #15191b;
+  --color-ink-dim: #5b636a;
+  --color-ink-faint: #99a1a7;
 
-  --color-signal: #2dd4bf;        /* aqua — brand / interactive */
-  --color-signal-dim: #115e57;
+  --color-signal: #5f8a00;       /* deep lime-green — readable accent + text */
+  --color-lime: #c2f000;         /* vivid lime — brand fills */
+  --color-lime-soft: #ebffa6;    /* pale lime tint */
 
-  --color-approve: #34d399;       /* emerald */
-  --color-deny: #fb7185;          /* rose */
-  --color-escalate: #fbbf24;      /* amber */
+  --color-approve: #059669;      /* emerald */
+  --color-deny: #e11d48;         /* rose */
+  --color-escalate: #d97706;     /* amber */
+
+  --radius-xl2: 1.25rem;
+  --shadow-soft: 0 1px 2px rgba(16, 24, 16, 0.04), 0 18px 48px -16px rgba(16, 24, 16, 0.14);
 }
 
-/* ---- base --------------------------------------------------------------- */
+html {
+  color-scheme: light;
+}
 html,
 body,
 #root {
@@ -36,27 +42,29 @@ body {
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  /* subtle control-room grid + glow for atmosphere */
+  text-rendering: optimizeLegibility;
   background-image:
-    radial-gradient(900px 500px at 85% -10%, rgba(45, 212, 191, 0.06), transparent 60%),
-    linear-gradient(var(--color-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-  background-size: 100% 100%, 44px 44px, 44px 44px;
-  background-position: 0 0, -1px -1px, -1px -1px;
+    radial-gradient(1100px 620px at 92% -18%, rgba(194, 240, 0, 0.28), transparent 55%),
+    radial-gradient(820px 520px at -5% 112%, rgba(5, 150, 105, 0.08), transparent 55%);
+  background-attachment: fixed;
 }
 
-/* faint grid only where it reads as texture, not noise */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 12, 15, 0.85) 100%);
-  pointer-events: none;
-  z-index: 0;
+/* frosted glass surface (macOS/iOS vibrancy) */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(22px) saturate(165%);
+  -webkit-backdrop-filter: blur(22px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: var(--shadow-soft);
+}
+.glass-dim {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
 }
 
 ::selection {
-  background: rgba(45, 212, 191, 0.25);
+  background: rgba(194, 240, 0, 0.45);
 }
 
 ::-webkit-scrollbar {
@@ -65,30 +73,41 @@ body::before {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-line-bright);
-  border-radius: 6px;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.animate-rise {
-  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
+/* ---- keyframes ---------------------------------------------------------- */
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
 }
 .animate-pulse-dot {
   animation: pulse-dot 1.1s ease-in-out infinite;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-6px) scale(1.02); }
+}
+.animate-orb {
+  animation: orb-float 5s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

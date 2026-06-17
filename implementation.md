@@ -37,12 +37,12 @@ a file was written. Full plan: `Plan.md`. Branch: `feat/refund-agent`.
 
 ## 5. Identity + guardrails
 *Verify: authenticated cross-customer access fails; in_chat verify-then-fetch; output-validation mismatch fails closed; guards OFF still blocks injection.*
-- [ ] `identity/{session.py, context.py, dispatcher.py, ownership.py, verify.py}`
-- [ ] InputGuard + OutputValidator (toggleable)
+- [x] `identity/session.py` — server-side sessions (authenticated bind + in_chat deterministic verify); IDOR scoping in `db/repository` + `agent/tools`
+- [x] `agent/guards.py` — InputGuard (injection scan) + OutputValidator (verdict-match), toggleable; covered by tests
 
 ## 6. FastAPI app wiring
 *Verify: `/api/health` ok; `/api/session` → session_id; `/api/chat` SSE emits coarse status events; all `/api/admin/*` respond.*
-- [ ] `app/main.py` + routers; thin layer over `run_agent`
+- [x] `app/main.py` (lifespan init+seed) + `chat_router` (`/api/session`, `/api/session/verify`, `/api/chat` SSE, `/api/customers`) + `admin_router`; thin layer over `run_agent` — verified live
 
 ## 7. Frontend
 *Verify: chat round-trips; `/admin` Runs&Traces drill-down shows tool I/O + tokens + cost + latency + retries; Settings PUT works; Data tab resets an order.*
