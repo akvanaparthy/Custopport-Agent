@@ -1,3 +1,27 @@
-Goal.md
+# secrets / local env
+.env
+.env.*
+!.env.example
 
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# databases (domain + trace store are seeded/created at runtime)
+*.db
+*.sqlite3
+data/*.db
+
+# node / frontend build
+node_modules/
+dist/
+.vite/
+
+# project artifacts
+Goal.md
+Plan.md
 ./claude
