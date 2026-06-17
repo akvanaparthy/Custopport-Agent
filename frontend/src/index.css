@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* ---- design tokens (control-room dark) ---------------------------------- */
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-canvas: #0a0c0f;
+  --color-panel: #12151a;
+  --color-panel-2: #171b21;
+  --color-line: #242a32;
+  --color-line-bright: #323a44;
+  --color-ink: #e8ebef;
+  --color-ink-dim: #9aa3af;
+  --color-ink-faint: #5b6470;
+
+  --color-signal: #2dd4bf;        /* aqua — brand / interactive */
+  --color-signal-dim: #115e57;
+
+  --color-approve: #34d399;       /* emerald */
+  --color-deny: #fb7185;          /* rose */
+  --color-escalate: #fbbf24;      /* amber */
+}
+
+/* ---- base --------------------------------------------------------------- */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  /* subtle control-room grid + glow for atmosphere */
+  background-image:
+    radial-gradient(900px 500px at 85% -10%, rgba(45, 212, 191, 0.06), transparent 60%),
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 100% 100%, 44px 44px, 44px 44px;
+  background-position: 0 0, -1px -1px, -1px -1px;
+}
+
+/* faint grid only where it reads as texture, not noise */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 12, 15, 0.85) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.25);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line-bright);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-rise {
+  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.animate-pulse-dot {
+  animation: pulse-dot 1.1s ease-in-out infinite;
+}
