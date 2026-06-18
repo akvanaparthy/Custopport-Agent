@@ -105,6 +105,22 @@ def test_cursed_order_produces_a_retry_step(conn):
     assert "TransientToolError" in retried[0]["attempts_json"]
 
 
+def test_run_agent_fails_closed_when_the_llm_crashes(conn):
+    # an LLM/infra failure mid-run must never approve, never move money, and must
+    # finalize the trace as errored (not leave it dangling 'running')
+    class _BoomLLM:
+        def create(self, **kw):
+            raise RuntimeError("LLM down")
+
+    res = _run(conn, "cust_01", _BoomLLM())
+    assert res.outcome == "ERROR"
+    assert res.verdict is None
+    assert res.refund_id is None
+    assert _refunded(conn, "ord_clean") is False
+    run = conn.execute("SELECT status FROM runs WHERE run_id = ?", (res.run_id,)).fetchone()
+    assert run["status"] == "error"
+
+
 def test_run_is_fully_traced(conn):
     res = _run(conn, "cust_01", FakeLLM([[classify("ord_clean", "damaged")]]))
     run = conn.execute("SELECT * FROM runs WHERE run_id = ?", (res.run_id,)).fetchone()

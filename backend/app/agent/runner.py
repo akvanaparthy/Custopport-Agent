@@ -61,7 +61,18 @@ def run_agent(
         "run_id": run_id,
         "deps": deps,
     }
-    final = graph.invoke(state)
+    try:
+        final = graph.invoke(state)
+    except Exception:
+        # Fail closed: an LLM/DB/infra failure mid-run never approves and never
+        # leaves the trace dangling. Finalize the run as errored (so the console
+        # shows it) and hand the caller a graceful message.
+        recorder.finish_run(run_id, final_verdict=None, status="error")
+        return AgentRunResult(
+            run_id=run_id, outcome="ERROR", verdict=None, refund_id=None,
+            reply="I'm sorry — something went wrong on our end and I couldn't complete that "
+                  "request. Please try again in a moment.",
+        )
 
     verdict: Optional[Verdict] = final.get("verdict")
     outcome = final.get("outcome") or (verdict.decision.value if verdict else "INFO")

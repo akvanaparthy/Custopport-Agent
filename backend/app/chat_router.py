@@ -180,33 +180,43 @@ def chat(body: ChatBody, x_session_id: str = Header(...), conn=Depends(get_conn)
 
     def gen():
         yield _sse("run_started", {"conversation_id": conversation_id})
-        result = run_agent(
-            messages=history,
-            identity=identity, conn=conn, llm=llm,
-            conversation_id=conversation_id, message_id=message_id, now=now,
-        )
-        # persist the exchange as a support ticket (history)
-        repo.create_ticket(
-            conn, conversation_id=conversation_id, customer_id=identity.customer_id or "",
-            customer_message=body.message, agent_reply=result.reply,
-            verdict=result.verdict.decision.value if result.verdict else None,
-            outcome=result.outcome, run_id=result.run_id, now=now,
-        )
-        # the agent's "let me check your order…" preamble (text it emitted while
-        # calling tools) — shown to the customer, not just buried in the trace
-        for note in result.progress:
-            yield _sse("assistant_note", {"message": note})
-        if result.verdict is not None:
-            yield _sse("verdict", {
-                "decision": result.verdict.decision.value,
-                "policy_refs": result.verdict.policy_refs,
+        try:
+            result = run_agent(
+                messages=history,
+                identity=identity, conn=conn, llm=llm,
+                conversation_id=conversation_id, message_id=message_id, now=now,
+            )
+            # the agent's "let me check your order…" preamble (text it emitted while
+            # calling tools) — shown to the customer, not just buried in the trace
+            for note in result.progress:
+                yield _sse("assistant_note", {"message": note})
+            if result.verdict is not None:
+                yield _sse("verdict", {
+                    "decision": result.verdict.decision.value,
+                    "policy_refs": result.verdict.policy_refs,
+                })
+            yield _sse("final_message", {
+                "message": result.reply,
+                "outcome": result.outcome,
+                "run_id": result.run_id,
+                "conversation_id": conversation_id,
             })
-        yield _sse("final_message", {
-            "message": result.reply,
-            "outcome": result.outcome,
-            "run_id": result.run_id,
-            "conversation_id": conversation_id,
-        })
+        except Exception:
+            # never leave the client with a hung/half stream
+            yield _sse("error", {"message": "Something went wrong handling your request. Please try again."})
+            yield _sse("done", {})
+            return
+        # Persist the exchange as a support ticket AFTER the customer has their
+        # answer — a history write must never break the response (best-effort).
+        try:
+            repo.create_ticket(
+                conn, conversation_id=conversation_id, customer_id=identity.customer_id or "",
+                customer_message=body.message, agent_reply=result.reply,
+                verdict=result.verdict.decision.value if result.verdict else None,
+                outcome=result.outcome, run_id=result.run_id, now=now,
+            )
+        except Exception:
+            pass
         yield _sse("done", {})
 
     return StreamingResponse(gen(), media_type="text/event-stream")

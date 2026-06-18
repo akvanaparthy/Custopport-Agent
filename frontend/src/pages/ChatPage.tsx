@@ -182,6 +182,7 @@ function Conversation() {
   const setSession = useApp((s) => s.setSession);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
+  const [resolved, setResolved] = useState(false); // closed after a settled (approve) or escalated request
   const convId = useRef("conv_" + rid());
   const endRef = useRef<HTMLDivElement>(null);
 
@@ -199,7 +200,7 @@ function Conversation() {
   }, []);
 
   const sendText = async (text: string) => {
-    if (!text.trim() || streaming || !sessionId) return;
+    if (!text.trim() || streaming || !sessionId || resolved) return;
     setInput("");
     addMessage({ id: rid(), role: "user", text });
     let aid = rid();
@@ -216,6 +217,15 @@ function Conversation() {
           updateMessage(aid, { verdict: data.decision, policyRefs: data.policy_refs });
         } else if (ev === "final_message") {
           updateMessage(aid, { text: data.message, outcome: data.outcome, runId: data.run_id, pending: false });
+          // a settled refund (approved) or a hand-off to a human (escalated) closes the
+          // request; a denial stays open so the customer can add context
+          if (data.outcome === "APPROVE" || data.outcome === "ESCALATE") setResolved(true);
+        } else if (ev === "error") {
+          updateMessage(aid, {
+            text: data?.message || "Something went wrong on our end. Please try again.",
+            pending: false,
+            outcome: "ERROR",
+          });
         }
       });
     } catch (e: any) {
@@ -227,6 +237,7 @@ function Conversation() {
 
   const newChat = () => {
     convId.current = "conv_" + rid();
+    setResolved(false);
     setSession({ messages: [] });
   };
 
@@ -287,30 +298,46 @@ function Conversation() {
       </div>
 
       <div className="mx-auto mt-4 w-full max-w-3xl">
-        <div className="glass flex items-end gap-2 rounded-[22px] p-2">
-          <textarea
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                sendText(input);
-              }
-            }}
-            rows={1}
-            placeholder="Describe your refund request…"
-            className="max-h-40 flex-1 resize-none bg-transparent px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink-faint"
-          />
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={() => sendText(input)}
-            disabled={streaming || !input.trim()}
-            className="grid h-10 w-10 place-items-center rounded-full bg-ink text-lime transition-opacity hover:opacity-90 disabled:opacity-30"
-            aria-label="Send"
+        {resolved ? (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass flex items-center justify-between gap-3 rounded-[22px] px-4 py-3"
           >
-            {streaming ? <span className="h-2 w-2 animate-pulse-dot rounded-full bg-lime" /> : "↑"}
-          </motion.button>
-        </div>
+            <span className="text-sm text-ink-dim">This request has been resolved. Start a new chat for anything else.</span>
+            <button
+              onClick={newChat}
+              className="shrink-0 rounded-full bg-ink px-4 py-1.5 text-xs font-medium text-lime shadow-sm transition-opacity hover:opacity-90"
+            >
+              New chat
+            </button>
+          </motion.div>
+        ) : (
+          <div className="glass flex items-end gap-2 rounded-[22px] p-2">
+            <textarea
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  sendText(input);
+                }
+              }}
+              rows={1}
+              placeholder="Describe your refund request…"
+              className="max-h-40 flex-1 resize-none bg-transparent px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink-faint"
+            />
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => sendText(input)}
+              disabled={streaming || !input.trim()}
+              className="grid h-10 w-10 place-items-center rounded-full bg-ink text-lime transition-opacity hover:opacity-90 disabled:opacity-30"
+              aria-label="Send"
+            >
+              {streaming ? <span className="h-2 w-2 animate-pulse-dot rounded-full bg-lime" /> : "↑"}
+            </motion.button>
+          </div>
+        )}
         <p className="mt-2 text-center text-[11px] text-ink-faint">
           The agent gathers facts; a deterministic policy engine makes the final call.
         </p>
