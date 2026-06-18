@@ -16,9 +16,10 @@
 
 **🤖 Agent — reply**
 
-> I can see your Throw Blanket order (ord_expired). To get your refund request submitted to the policy engine, could you tell me **why you'd like to return it**? For example:
+> I can see your order for the **Throw Blanket** (Order `ord_expired`). I'd be happy to submit a refund request for you through the proper process.
 >
-> - Did it arrive damaged or broken?
+> Could you briefly tell me **why you'd like a refund**? For example:
+> - Did it arrive damaged?
 > - Is it defective or not working as expected?
 > - Was it different from what was described?
 > - Did you receive the wrong item?
@@ -26,4 +27,4 @@
 
 ---
 
-_run `run_2226d97d8b0e` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_682ec37a794c` · generated 2026-06-18T17:04:58.035451+00:00_

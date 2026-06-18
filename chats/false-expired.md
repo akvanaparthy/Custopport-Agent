@@ -16,14 +16,16 @@
 
 **🤖 Agent — reply**
 
-> I found your Throw Blanket order. You mentioned it was just delivered two days ago — could you let me know the reason for the refund? For example:
+> I found your Throw Blanket order. You mentioned you'd like a refund, but could you let me know the **reason** for the return? For example:
 >
-> - Did it arrive **damaged**?
-> - Is it **defective**?
-> - Was it **not as described**?
-> - Did you receive the **wrong item**?
-> - Or have you simply **changed your mind**?
+> - It arrived **damaged**
+> - It's **defective**
+> - It's **not as described**
+> - You received the **wrong item**
+> - You simply **changed your mind**
+>
+> This helps me classify your request correctly before passing it to our policy engine.
 
 ---
 
-_run `run_601e409909bc` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_36fa568bb7d1` · generated 2026-06-18T17:04:58.035451+00:00_

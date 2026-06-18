@@ -18,10 +18,8 @@
 
 > Thank you for reaching out to us! I've reviewed your refund request, and because the amount exceeds $500.00, our policy requires that it be reviewed by a member of our specialized support team to ensure everything is handled with the care it deserves.
 >
-> A human agent will be in touch with you shortly to assist you further and guide you through the next steps. We truly appreciate your patience, and please rest assured that your request is in good hands!
->
-> If you have any additional questions in the meantime, don't hesitate to ask. 😊
+> A human agent will be in touch with you shortly to assist you further and work toward a resolution. We appreciate your patience, and please don't hesitate to reach out if you have any questions in the meantime. We're here to help!
 
 ---
 
-_run `run_216a63e280e6` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_efccce34dba8` · generated 2026-06-18T17:04:58.035451+00:00_

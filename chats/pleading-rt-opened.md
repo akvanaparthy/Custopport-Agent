@@ -16,8 +16,12 @@
 
 **🤖 Agent — reply**
 
-> Thank you for reaching out to us! After reviewing your refund request, I wanted to let you know that your case has been flagged for a closer look by one of our specialist team members. This sometimes happens when a return involves items that have been opened or used, or when we need a little more information to fully understand the situation — and that's completely okay! A member of our team will personally review your request and be in touch with you as soon as possible. We appreciate your patience and want to make sure your case gets the careful attention it deserves. If you have any additional details or documentation you'd like to share in the meantime, please don't hesitate to send them our way — it may help speed things along. Thank you for being a valued customer!
+> Thank you for reaching out to us! After reviewing your refund request, our system has flagged it for a closer look by one of our specialist team members. This is because your request involves items that appear to have been opened or used without a reported defect, and we want to make sure your case is handled fairly and thoroughly.
+>
+> A member of our team will personally review your request and will be in touch with you as soon as possible. We appreciate your patience and understanding, and we're committed to getting this resolved for you in the best way we can.
+>
+> If you have any additional information or documentation — such as photos or a description of the item's condition — feel free to have that ready, as it may help speed up the review process. Thank you for shopping with us, and we're sorry for any inconvenience!
 
 ---
 
-_run `run_67fb3ae85ba0` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_800b654a11a8` · generated 2026-06-18T17:04:58.035451+00:00_

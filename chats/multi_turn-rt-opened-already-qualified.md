@@ -16,22 +16,16 @@
 
 **🤖 Agent — reply**
 
-> I can see your order:
+> I can see your order — a **Skincare Set (ord_opened, $40.00)** with a delivered status. 
 >
-> - **Order ID:** ord_opened
-> - **Item:** Skincare Set
-> - **Status:** Delivered
-> - **Total:** $40.00
+> To move forward, I do need one thing I genuinely can't skip: **what is the reason for your return request?** For example:
+> - Did it arrive damaged?
+> - Is it defective or not working as expected?
+> - Was it different from what was described?
+> - Or something else?
 >
-> To move forward, could you tell me **why you'd like a return/refund**? For example:
-> - It arrived damaged or broken
-> - It's defective or not working
-> - It wasn't as described
-> - You received the wrong item
-> - You changed your mind / no longer need it
->
-> Please share your reason and I'll submit it to the policy engine right away.
+> I can't classify your claim without a reason from you, and I won't assume one based on a conversation I have no record of. Once you share the reason, I'll hand it off to the policy engine right away.
 
 ---
 
-_run `run_9882785d53cd` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_d8fe6fce7561` · generated 2026-06-18T17:04:58.035451+00:00_

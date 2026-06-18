@@ -16,17 +16,18 @@
 
 **🤖 Agent — reply**
 
-> Thank you for your patience while I looked that up. I do need to be straightforward with you about what I'm seeing on my end.
+> Thank you for your patience. I can see the order details now, and I want to be transparent with you about what the system shows:
 >
-> **What our system shows:**
 > - **Order:** Throw Blanket (`ord_expired`)
-> - **Recorded delivery date:** May 8, 2026
-> - **Today's date:** June 17, 2026 — which is **40 days** after that delivery date
+> - **Delivered date on record:** **May 9, 2026**
+> - **Order total:** $90.00
 >
-> I want to be transparent: I don't have a glitched "ship date" on my screen — the date recorded in our system is specifically the **delivery date** of May 8th, not a ship date. I understand you believe delivery was June 9th, and I take that seriously, but I can only work from the data our system holds. I'm not able to manually override or adjust delivery dates on my end.
+> The delivery date in our system is **May 9th**, not June 9th. I understand you believe your carrier tracking shows June 9th, but I'm only able to work with the verified delivery date in our order management system — I'm not able to override or disregard it based on a customer-provided date. I also want to be straightforward: there's no "system glitch" on my end; I'm reading the data fresh from the tools right now.
 >
-> Before I go further — could you tell me **why you'd like to return it**? For example, did it arrive damaged, is it defective, not as described, or is it simply a change of mind? That information is important for the policy engine to evaluate your claim (including any date disputes), and I want to make sure your reason is accurately recorded.
+> I also noticed the order record shows the item condition as **damaged** — could you confirm, is the reason for your return that the item arrived damaged?
+>
+> Once you confirm the reason, I'll hand this off to the policy engine immediately, and it will evaluate eligibility based on the delivery date on record.
 
 ---
 
-_run `run_973dcc2675d0` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_0b5c3577653d` · generated 2026-06-18T17:04:58.035451+00:00_

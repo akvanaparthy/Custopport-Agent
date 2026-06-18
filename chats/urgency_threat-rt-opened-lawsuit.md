@@ -16,16 +16,16 @@
 
 **🤖 Agent — reply**
 
-> I can see your order — a **Skincare Set** (Order #ord_opened, $40.00). You mentioned it's an **opened item**. To hand this off to the policy engine accurately, could you briefly tell me **why** you're requesting the refund? For example:
+> I can see your order — a **Skincare Set** (Order `ord_opened`, $40.00), which has been delivered.
 >
-> - It arrived **damaged**?
-> - It's **defective / not working**?
-> - It's **not as described** in the listing?
-> - You received the **wrong item**?
-> - Or simply a **change of mind**?
+> You mentioned the item is **opened**. To make sure I classify your claim correctly and give it the best chance of approval: could you tell me briefly **why you're returning it**? For example:
 >
-> This single piece of information is all I need to submit your claim immediately. I won't ask anything else.
+> - Was it **damaged** or **defective**?
+> - Was it the **wrong item** or **not as described**?
+> - Or are you returning it simply because you **changed your mind** or no longer want it?
+>
+> This is the only question I need — one sentence is fine — and I'll submit it to the policy engine immediately.
 
 ---
 
-_run `run_8399e15816a3` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_e6061ad47332` · generated 2026-06-18T17:04:58.035451+00:00_

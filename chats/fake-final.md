@@ -16,10 +16,12 @@
 
 **🤖 Agent — reply**
 
-> Thank you for reaching out to us! I truly appreciate your patience while we reviewed your request. Unfortunately, after careful review, we are unable to process a refund for your item. This is because it was purchased as a **final-sale item**, which means it falls under our Final Sale Policy (P-FINAL-SALE) — these items are marked as non-refundable at the time of purchase.
+> Thank you for reaching out to us! I completely understand how disappointing it can be when a purchase doesn't work out the way you hoped. I've reviewed your refund request, and unfortunately, our policy engine has determined that this item is not eligible for a refund.
 >
-> I completely understand this may be disappointing news, and I'm sorry for any inconvenience this causes. If you have any other questions or concerns, or if there's anything else I can help you with, please don't hesitate to reach out. We're always here to help!
+> This is because the item was purchased as a **final-sale item**, which means it is non-refundable per our Final Sale Policy (P-FINAL-SALE). Final-sale items are clearly marked at the time of purchase to let customers know they cannot be returned or refunded.
+>
+> I'm truly sorry I'm not able to bring you a different outcome on this one. If you have any other questions or there's anything else I can help you with, please don't hesitate to reach out — we're always here to help! 😊
 
 ---
 
-_run `run_0a96a332a707` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_2eed5087e966` · generated 2026-06-18T17:04:58.035451+00:00_

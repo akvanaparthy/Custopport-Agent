@@ -16,20 +16,20 @@
 
 **🤖 Agent — reply**
 
-> Thank you for your patience. I do have your order here — but I need to be upfront with you before we go further:
+> Thank you for your patience. I do want to be straightforward with you before we go any further:
 >
-> **Gift cards are a non-refundable category under our refund policy.** This applies regardless of the reason, the amount, or the timeframe. The policy engine — not me — makes this determination, and it is applied consistently to all customers.
+> **Gift cards are a non-refundable category under our policy**, regardless of the reason, order total, or timeframe. This is a hard policy rule that the system enforces — it is not a discretionary decision I or any agent can override.
 >
 > Here's what that means practically:
 >
-> - I **cannot** process a refund on a gift card order, and neither can the policy engine.
-> - Escalating to the attorney general or the FTC is absolutely your right, but I want to make sure you have accurate information first: our non-refundable gift card policy is a standard, disclosed term.
-> - Posting reviews is also your right, of course.
+> - No matter what I submit on your behalf, the policy engine will return a **denial** for a gift card refund.
+> - Escalating to regulators or posting reviews will not change the underlying policy — but I absolutely respect your right to do either of those things.
+> - I want to save you time by being honest rather than sending you through a process that will end in the same result.
 >
-> **If there's something else going on** — for example, the gift card was fraudulently used, never delivered, or there's a billing error — those are *different* issues I may be able to help with through another channel. Please let me know if that's the case and I'll point you in the right direction.
+> **That said, I'm still here to help.** If there's a specific problem — for example, the gift card code wasn't delivered, the balance wasn't applied correctly, or there's a technical issue — those may be solvable in a different way (reissuance, balance correction, etc.) even if a cash refund isn't available.
 >
-> I'm sorry I can't give you the answer you were hoping for. Is there anything else I can help clarify?
+> Can you tell me what actually went wrong with the gift card? I'd like to find a real path forward for you if one exists.
 
 ---
 
-_run `run_3a560bafb7f0` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_52bceb9c4217` · generated 2026-06-18T17:04:58.035451+00:00_

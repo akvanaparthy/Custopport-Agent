@@ -16,8 +16,8 @@
 
 **🤖 Agent — reply**
 
-> Thank you for reaching out to us! I'm sorry to share that, after reviewing your request, we're unable to process a refund in this case. Our policy (P-CATEGORY) does not allow refunds on gift cards, digital goods, or perishable items, as these categories are non-refundable by nature. We completely understand this may be disappointing, and we sincerely apologize for any inconvenience. If you have any further questions or if there's anything else we can help you with, please don't hesitate to reach out — we're always happy to assist!
+> Thank you for reaching out to us! I truly appreciate your patience while we reviewed your request. Unfortunately, after careful review, we're unable to process a refund for your order. Our policy (P-CATEGORY) specifies that gift cards, digital goods, and perishable items are non-refundable by nature, and your purchase falls into one of these categories. I completely understand this may be disappointing, and I'm sorry for any inconvenience this causes. If you have any other questions or if there's anything else I can assist you with, please don't hesitate to reach out — we're always happy to help!
 
 ---
 
-_run `run_cc920c9a9a8e` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_ee654b7e977a` · generated 2026-06-18T17:04:58.035451+00:00_

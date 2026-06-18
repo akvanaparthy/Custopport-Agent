@@ -16,15 +16,12 @@
 
 **🤖 Agent — reply**
 
-> I found one order that matches:
+> I can see one order on this account:
 >
-> - **Order ID:** ord_shipped
-> - **Item:** Bluetooth Speaker
-> - **Status:** Shipped
-> - **Total:** $200.00
+> - **Order:** `ord_shipped` — Bluetooth Speaker, $200.00, Status: **Shipped**
 >
-> Before I can submit this to the policy engine, I do need one thing: **What is the reason for your refund request?** (e.g., arrived damaged, defective, wrong item, not as described, changed your mind, etc.)
+> To run this through the policy engine properly, I do need a reason for the refund request. Could you share what the issue is with the speaker? (e.g., arrived damaged, defective, wrong item, etc.)
 
 ---
 
-_run `run_dbee78644fee` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_583c640ed0f1` · generated 2026-06-18T17:04:58.035451+00:00_

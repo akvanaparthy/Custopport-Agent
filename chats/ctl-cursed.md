@@ -16,8 +16,8 @@
 
 **🤖 Agent — reply**
 
-> Great news! Your refund request has been approved. 🎉 Based on our review, your order meets our refund criteria — it was delivered within the eligible window and your reason for the return is fully covered under our policy (ref: P-CLEAN-APPROVE). You can expect the refund to be processed back to your original payment method within the standard processing timeframe (typically 5–10 business days, depending on your bank or card provider). If you have any further questions or need assistance in the meantime, please don't hesitate to reach out. We're happy to help!
+> Great news! Your refund request has been approved. 🎉 Our policy engine has reviewed your case and, because your order was delivered within the eligible window and you provided a clear qualifying reason, your refund has been fully authorized (Policy Ref: P-CLEAN-APPROVE). You can expect the refund to be processed back to your original payment method within the standard processing timeframe — typically 5–10 business days, depending on your bank or card provider. If you have any further questions or need help with anything else, please don't hesitate to reach out. We're happy to help!
 
 ---
 
-_run `run_49a03102bf8f` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_06f48eadd9c7` · generated 2026-06-18T17:04:58.035451+00:00_

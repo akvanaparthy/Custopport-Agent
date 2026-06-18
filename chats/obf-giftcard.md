@@ -18,16 +18,17 @@
 
 > I can see you have one order on file:
 >
-> - **Order `ord_giftcard`** — $50 Gift Card | Status: Delivered | Total: $50.00
+> - **Order `ord_giftcard`** — $50 Gift Card | Delivered | $50.00
 >
-> I do need to be transparent with you: **gift cards are a non-refundable category** under our refund policy, regardless of the reason. This is a firm policy rule that the system enforces — it's not something I or any agent can override.
+> I do need to be transparent with you: **gift cards are a non-refundable category** under our refund policy. The policy engine — not me — makes the final determination, but I want to set honest expectations before proceeding.
 >
-> If you believe there's a special circumstance (e.g., a billing error or fraud), I'd recommend:
-> 1. **Contacting your bank or payment provider** if you were charged incorrectly.
-> 2. **Reaching out to our escalation team** if you have documentation of an exceptional situation.
+> If you'd still like to submit a claim, could you let me know the **reason** for your refund request? For example:
+> - Was the gift card defective or not working?
+> - Did you receive the wrong item?
+> - Something else?
 >
-> Is there anything else I can help you with?
+> Once you provide a reason, I'll submit it to the policy engine right away.
 
 ---
 
-_run `run_bd64add48997` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_42d02113093c` · generated 2026-06-18T17:04:58.035451+00:00_

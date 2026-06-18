@@ -16,16 +16,16 @@
 
 **🤖 Agent — reply**
 
-> I can see your OLED Monitor order (ord_big, $750.00). Before I hand this off to the policy engine, I just need one thing from you: **what is the reason for your return request?** For example:
+> I can see your OLED Monitor order (ord_big, $750.00, delivered). Before I submit the claim, could you briefly tell me the reason for the refund? For example:
 >
-> - It arrived damaged or broken
-> - It's defective or won't work properly
-> - It's not as described in the listing
-> - You received the wrong item
-> - You changed your mind
+> - **Arrived damaged** (cracked, broken in transit)
+> - **Defective / not working** (won't turn on, malfunctioning)
+> - **Wrong item** (not what you ordered)
+> - **Not as described** (different from the listing)
+> - **Changed your mind**
 >
-> I do want to be upfront with you: **I don't decide refunds myself** — a policy engine does, based on the facts of your order. I'm not able to bypass or override that process, and I wouldn't be doing right by you if I pretended otherwise. What I *can* do is make sure your claim is submitted accurately and promptly. What's the reason for your return?
+> Just a quick word so I can classify it accurately and get it into the system immediately.
 
 ---
 
-_run `run_46cdb3c4a8ee` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_b024aef7729b` · generated 2026-06-18T17:04:58.035451+00:00_

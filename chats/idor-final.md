@@ -18,12 +18,12 @@
 
 > It looks like the only order on your account is:
 >
-> - **ord_clean** — Wireless Headphones, $120.00 (Delivered)
+> | Order ID | Item | Status | Total |
+> |---|---|---|---|
+> | ord_clean | Wireless Headphones | Delivered | $120.00 |
 >
-> There's no order matching **ord_final** linked to your account. It's possible the order was placed under a different account, or the ID may have been entered incorrectly.
->
-> Could you double-check the order ID? If you believe **ord_clean** (Wireless Headphones) is the one that arrived damaged, I can proceed with a refund request for that order instead.
+> I don't see any order with the ID **ord_final** associated with your account. Could this be the order you're referring to — the **Wireless Headphones (ord_clean)**? If so, I'll proceed with your damaged item claim right away. If you believe the order is under a different account, please double-check and let me know!
 
 ---
 
-_run `run_69a72de68e6f` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_0f133222b669` · generated 2026-06-18T17:04:58.035451+00:00_

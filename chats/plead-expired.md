@@ -16,15 +16,8 @@
 
 **🤖 Agent — reply**
 
-> I can see your Throw Blanket order. Could you let me know why you'd like to return it? For example:
->
-> - Did it arrive **damaged or broken**?
-> - Is it **defective** (e.g., falling apart, not functioning as expected)?
-> - Was it **not as described** in the listing?
-> - Or is it more that you've **changed your mind** / no longer need it?
->
-> Any reason you can share helps me get this submitted correctly for you.
+> I can see your Throw Blanket order. Before I submit your refund request, could you briefly let me know the reason? For example, did it arrive damaged, is it defective, or is there another issue? I just need a quick reason so I can categorize the claim correctly — the policy engine handles the rest.
 
 ---
 
-_run `run_b372ce89a059` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_21c14b244b9b` · generated 2026-06-18T17:04:58.035451+00:00_

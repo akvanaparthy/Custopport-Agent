@@ -16,12 +16,8 @@
 
 **🤖 Agent — reply**
 
-> Thank you for reaching out to us! I'm sorry to hear you're having an issue with your order. I wanted to let you know that after reviewing your request, our system has determined that a refund cannot be processed at this time.
->
-> According to our refund policy (P-STATUS), refunds are only eligible for orders that have already been delivered. Since your order does not currently have a delivered status, it unfortunately does not qualify for a refund at this stage.
->
-> If you have any concerns about the status of your order or believe there has been an error, please don't hesitate to reach out and we'd be happy to help look into it further. We truly appreciate your patience and understanding!
+> Thank you for reaching out to us! I truly appreciate your patience while we reviewed your request. After carefully looking into your order, I'm sorry to share that we're unable to process a refund at this time. Our policy requires that an order must have been delivered before it becomes eligible for a refund (Policy P-STATUS). Since your order has not yet reached that delivered status, it doesn't qualify under our current refund guidelines. Once your order has been delivered, we'd be happy to assist you further if any issues arise at that point. If you have any questions about your order's status or anything else, please don't hesitate to reach out — we're always here to help!
 
 ---
 
-_run `run_59bf4b7bb105` · generated 2026-06-17T07:32:44.984477+00:00_
+_run `run_f457825445df` · generated 2026-06-18T17:04:58.035451+00:00_
