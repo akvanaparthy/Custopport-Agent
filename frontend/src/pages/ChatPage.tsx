@@ -202,13 +202,21 @@ function Conversation() {
     if (!text.trim() || streaming || !sessionId) return;
     setInput("");
     addMessage({ id: rid(), role: "user", text });
-    const aid = rid();
+    let aid = rid();
     addMessage({ id: aid, role: "agent", text: "", pending: true });
     setStreaming(true);
     try {
       await streamChat(sessionId, { message: text, conversation_id: convId.current }, (ev, data) => {
-        if (ev === "verdict") updateMessage(aid, { verdict: data.decision, policyRefs: data.policy_refs });
-        else if (ev === "final_message") updateMessage(aid, { text: data.message, outcome: data.outcome, runId: data.run_id, pending: false });
+        if (ev === "assistant_note") {
+          // the agent's "let me check…" preamble: settle this bubble, open a fresh one for the answer
+          updateMessage(aid, { text: data.message, pending: false });
+          aid = rid();
+          addMessage({ id: aid, role: "agent", text: "", pending: true });
+        } else if (ev === "verdict") {
+          updateMessage(aid, { verdict: data.decision, policyRefs: data.policy_refs });
+        } else if (ev === "final_message") {
+          updateMessage(aid, { text: data.message, outcome: data.outcome, runId: data.run_id, pending: false });
+        }
       });
     } catch (e: any) {
       updateMessage(aid, { text: `Sorry — something went wrong (${e.message}).`, pending: false, outcome: "ERROR" });

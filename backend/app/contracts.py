@@ -46,6 +46,11 @@ class OrderStatus(str, Enum):
 
 
 class ItemCondition(str, Enum):
+    """The condition of the item *being returned*, recorded with the return
+    request (an RMA field) — not the seller asserting a fault. The engine only
+    distinguishes opened/used (a non-defect return of an opened item needs a
+    human) from the rest; see engine `_ESCALATE_CONDITIONS`."""
+
     NEW = "new"
     DAMAGED = "damaged"
     DEFECTIVE = "defective"
@@ -113,7 +118,7 @@ class RefundContext(BaseModel):
     category: str = "general"
     claim_type: ClaimType = ClaimType.UNKNOWN
     claim_confidence: float = 0.0
-    item_condition: Optional[ItemCondition] = None
+    item_condition: Optional[ItemCondition] = None  # declared return condition (see ItemCondition)
 
     @property
     def non_refundable_category(self) -> bool:

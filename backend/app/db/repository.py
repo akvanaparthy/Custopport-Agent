@@ -212,3 +212,14 @@ def list_tickets(conn: sqlite3.Connection, customer_id: str, limit: int = 50) ->
         "SELECT * FROM tickets WHERE customer_id = ? ORDER BY created_at DESC LIMIT ?",
         (customer_id, limit),
     ).fetchall()
+
+
+def list_conversation(conn: sqlite3.Connection, conversation_id: str, limit: int = 30) -> list[sqlite3.Row]:
+    """Prior turns of ONE conversation, oldest first. The chat layer replays these
+    as the message history so a follow-up ('the headphones', 'yes that one') keeps
+    context across turns instead of being read in isolation."""
+    return conn.execute(
+        """SELECT customer_message, agent_reply FROM tickets
+           WHERE conversation_id = ? ORDER BY created_at ASC LIMIT ?""",
+        (conversation_id, limit),
+    ).fetchall()

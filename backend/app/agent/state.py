@@ -41,6 +41,7 @@ class AgentState(TypedDict, total=False):
     deps: Any  # Deps bundle (conn, llm, tools, recorder) — see runner.py
     # working values
     guard_flagged: bool
+    progress: list[str]  # gather-phase "let me check…" notes, surfaced to the user
     classification: Optional[Classification]
     refund_context: Optional[RefundContext]
     verdict: Optional[Verdict]

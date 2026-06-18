@@ -169,10 +169,19 @@ def chat(body: ChatBody, x_session_id: str = Header(...), conn=Depends(get_conn)
     message_id = "msg_" + uuid.uuid4().hex[:12]
     now = datetime.now(timezone.utc)
 
+    # Replay prior turns of this conversation so the agent keeps context across
+    # messages (the chat is multi-turn, not one-shot).
+    history: list[dict] = []
+    for t in repo.list_conversation(conn, conversation_id):
+        history.append({"role": "user", "content": t["customer_message"]})
+        if t["agent_reply"]:
+            history.append({"role": "assistant", "content": t["agent_reply"]})
+    history.append({"role": "user", "content": body.message})
+
     def gen():
         yield _sse("run_started", {"conversation_id": conversation_id})
         result = run_agent(
-            messages=[{"role": "user", "content": body.message}],
+            messages=history,
             identity=identity, conn=conn, llm=llm,
             conversation_id=conversation_id, message_id=message_id, now=now,
         )
@@ -183,6 +192,10 @@ def chat(body: ChatBody, x_session_id: str = Header(...), conn=Depends(get_conn)
             verdict=result.verdict.decision.value if result.verdict else None,
             outcome=result.outcome, run_id=result.run_id, now=now,
         )
+        # the agent's "let me check your order…" preamble (text it emitted while
+        # calling tools) — shown to the customer, not just buried in the trace
+        for note in result.progress:
+            yield _sse("assistant_note", {"message": note})
         if result.verdict is not None:
             yield _sse("verdict", {
                 "decision": result.verdict.decision.value,

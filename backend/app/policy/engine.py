@@ -54,6 +54,9 @@ def _escalations(ctx: RefundContext) -> list[str]:
     hits: list[str] = []
     if ctx.refund_amount > AUTO_APPROVE_CEILING:
         hits.append("P-MAX-AUTO")
+    # An opened/used item returned for a NON-defect reason is a judgment call
+    # (restocking, resale) — send it to a human. If the claim is damage/defect,
+    # the item being opened is expected, so condition doesn't escalate.
     if ctx.item_condition in _ESCALATE_CONDITIONS and ctx.claim_type not in _DEFECT_CLAIMS:
         hits.append("P-CONDITION")
     # Unclassifiable / low-confidence / non-standard (e.g. change-of-mind) claims

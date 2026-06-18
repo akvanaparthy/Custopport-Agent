@@ -120,7 +120,7 @@ function OrderDetail({ o, onClose, onRefund }: { o: CustomerOrder; onClose: () =
           <Detail k="Category" v={o.category} />
           <Detail k="Total" v={money(o.order_total, o.currency)} />
           <Detail k="Status" v={o.status} />
-          <Detail k="Condition" v={o.item_condition} />
+          <Detail k="Return condition" v={o.item_condition} />
           <Detail k="Delivered" v={o.delivered_date ?? "—"} />
           <Detail k="Final sale" v={o.is_final_sale ? "yes" : "no"} />
         </dl>

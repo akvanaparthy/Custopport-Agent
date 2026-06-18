@@ -3,7 +3,7 @@ imports. Builds effective config + trace recorder, runs the compiled graph, and
 returns a typed result."""
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Optional
 
@@ -30,6 +30,7 @@ class AgentRunResult:
     reply: str
     verdict: Optional[Verdict]
     refund_id: Optional[str]
+    progress: list[str] = field(default_factory=list)  # gather-phase notes for the UI
 
 
 def run_agent(
@@ -71,4 +72,5 @@ def run_agent(
         reply=final.get("reply", ""),
         verdict=verdict,
         refund_id=final.get("refund_id"),
+        progress=final.get("progress") or [],
     )

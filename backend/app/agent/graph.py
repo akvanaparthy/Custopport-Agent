@@ -87,6 +87,7 @@ def node_gather(state: AgentState) -> dict:
     tools = ToolRegistry(deps.conn, identity, fault_enabled=True)
     system = gather_system(cfg.persona, identity)
     messages = list(state["messages"])
+    notes: list[str] = []  # the agent's running "let me check…" text, surfaced to the user
 
     for _ in range(_GATHER_MAX_ROUNDS):
         with deps.recorder.step(run_id, "llm", "gather") as h:
@@ -104,11 +105,15 @@ def node_gather(state: AgentState) -> dict:
         if result.stop_reason in FAIL_CLOSED_STOP_REASONS:
             return {"verdict": _escalate("agent could not complete safely"),
                     "reply": "This request needs a human to review it — I've escalated it.",
-                    "outcome": "ESCALATE"}
+                    "outcome": "ESCALATE", "progress": notes}
 
         if result.stop_reason != "tool_use":
             return {"reply": result.text or "Could you share your order id and what went wrong?",
-                    "outcome": "INFO"}
+                    "outcome": "INFO", "progress": notes}
+
+        # text emitted alongside tool calls is the conversational preamble
+        if result.text and result.text.strip():
+            notes.append(result.text.strip())
 
         classification = None
         tool_results = []
@@ -127,11 +132,11 @@ def node_gather(state: AgentState) -> dict:
         messages.append({"role": "assistant", "content": result.raw_content or ""})
         messages.append({"role": "user", "content": tool_results})
         if classification is not None:
-            return {"classification": classification}
+            return {"classification": classification, "progress": notes}
 
     return {"verdict": _escalate("could not gather enough information"),
             "reply": "This request needs a human to review it — I've escalated it.",
-            "outcome": "ESCALATE"}
+            "outcome": "ESCALATE", "progress": notes}
 
 
 def node_policy_eval(state: AgentState) -> dict:
